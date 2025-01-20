@@ -10,3 +10,8 @@ class Game:
 
     def new_game(self):
         pass
+
+    def update(self):
+        pg.display.flip()
+        self.clock.tick(FPS)
+        pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
