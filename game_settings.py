@@ -2,3 +2,6 @@ RES = WIDTH, HEIGHT = 1800, 1000
 FPS = 60
 
 PLAYER_POS = 1.5, 5 #dis is where u will be when u spawn
+PLAYER_ANGLE = 0
+PLAYER_SPEED = 0.004
+PLAYER_ROT_SPEED = 0.002
