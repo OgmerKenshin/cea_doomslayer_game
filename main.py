@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 from game_settings import *
+from map import *
 
 class Game:
     def __init__(self):
@@ -17,7 +18,7 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
     def draw(self):
-        self.screen.fill('black')
+        self.map = Map(self)
 
     def check_events(self):
         for event in pg.event.get():
