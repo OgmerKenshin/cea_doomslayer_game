@@ -5,6 +5,7 @@ from game_settings import *
 class RayCasting:
     def __init__(self, game):
         self.game = game
+        self.rotation_speed = PLAYER_ROT_SPEED
 
     def ray_cast(self):
         ox, oy = self.game.player.pos

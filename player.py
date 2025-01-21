@@ -7,7 +7,6 @@ class Player:
         self.game = game
         self.x, self.y = PLAYER_POS
         self.angle = PLAYER_ANGLE
-        self.rotation = PLAYER_ROT_SPEED
 
     def movement(self):
         sin_a = math.sin(self.angle)
@@ -34,9 +33,9 @@ class Player:
         self.check_wall_collision(dx, dy)
 
         if keys[pg.K_LEFT]:
-            self.angle -= PLAYER_ROT_SPEED * self.game.delta_time
+            self.angle -= PLAYER_ROT_SPEED * self.game.delta_time * 0.75
         if keys[pg.K_RIGHT]:
-            self.angle += PLAYER_ROT_SPEED * self.game.delta_time
+            self.angle += PLAYER_ROT_SPEED * self.game.delta_time * 0.75
         self.angle %= math.tau
 
     def check_wall(self, x, y):
