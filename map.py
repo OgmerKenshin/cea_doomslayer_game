@@ -24,3 +24,7 @@ class Map:
             for i, value in enumerate(row):
                 if value:
                     self.world_map[(i, j)] = value
+
+    def draw(self):
+        [pg.draw.rect(self.game.screem, "darkgray", (pos[0] * 100, pos[1] * 100, 100, 100), 2)
+        for pos in self.world_map]
