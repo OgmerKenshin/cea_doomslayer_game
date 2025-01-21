@@ -49,6 +49,16 @@ class RayCasting:
                 x_vert += dx
                 y_vert += dy
                 depth_vert += delta_depth
+
+            #depth
+            if depth_vert < depth_hor:
+                depth = depth_vert
+            else:
+                depth = depth_hor
+
+            # drawing for debug
+            pg.draw.line(self.game.screen, "yellow", (100 * ox, 100 * oy),
+                        (100 *  ox + 100 * depth * cos_a, 100 * oy + 100 * depth * sin_a), 2)
             ray_angle += DELTA_ANGLE
 
     def update(self):
