@@ -1,6 +1,6 @@
 import pygame as pg
 import sys
-from settings import RES
+from game_settings import *
 
 class Game:
     def __init__(self):
