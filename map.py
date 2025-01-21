@@ -17,17 +17,6 @@ mini_map = [
 
      
 
-
-
-
-
-
-
-
-
-
-
-
 class Map:
     def __init__(self, game):
         self.game = game
