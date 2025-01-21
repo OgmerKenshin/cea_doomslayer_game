@@ -7,3 +7,8 @@ class Player:
         self.game = game
         self.x, self.y = PLAYER_POS
         self.angle = PLAYER_ANGLE
+
+    def movement(self):
+        pass
+
+    
