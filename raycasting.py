@@ -59,6 +59,9 @@ class RayCasting:
             #projectionnn
             proj_height = SCREEN_DIST / (depth + 0.0001)
 
+            #remove fishbowl effect cuz it's annoying
+            depth *= math.cos(self.game.player.angle - ray_angle)
+
             #wallssss
             color = [255 / (1 + depth ** 5 * 0.00002)] * 3
             pg.draw.rect(self.game.screen, "color",
