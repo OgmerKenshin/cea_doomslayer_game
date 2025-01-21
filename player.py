@@ -41,6 +41,11 @@ class Player:
 
     def check_wall(self, x, y):
         return (x, y) not in self.game.map.world_map 
+    def check_wall_collision(self, dx, dy):
+        if self.check_wall(int(self.x + dx), iny(self.y)):
+            self.x += dx
+        if self.check_wall(int(self.x), int(self.y + dy)):
+            self.y += dy
 
 
     def draw(self):
