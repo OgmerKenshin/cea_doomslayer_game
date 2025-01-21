@@ -13,6 +13,9 @@ class Player:
         cos_a = math.cos(self.angle)
         dx, dy = 0, 0
         speed = PLAYER_SPEED
+        speed_sin = speed = sin_a
+        speed_cos = speed = cos_a
+        
 
     def update(self):
         self.movement()
