@@ -15,7 +15,23 @@ class Player:
         speed = PLAYER_SPEED
         speed_sin = speed = sin_a
         speed_cos = speed = cos_a
-        
+
+        keys = pg.key.get_pressed()
+        if keys[pg.K_w]:
+            dx += speed_cos
+            dy += speed_sin
+        if keys[pg.K_s]:
+            dx += -speed_cos
+            dy += -speed_sin
+        if keys[pg.K_a]:
+            dx += speed_sin
+            dy += -speed_cos
+        if keys[pg.k_d]:
+            dx += -speed_sin
+            dy += speed_cos
+
+        self.x += dx
+        self.y += dy
 
     def update(self):
         self.movement()
