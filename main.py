@@ -19,6 +19,9 @@ class Game:
     def draw(self):
         self.screen.fill('black')
 
+    def check_events(self):
+        for event in pg.event.get():
+
     def run(self):
         while True:
             self.update()
