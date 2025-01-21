@@ -27,6 +27,10 @@ class Game:
 
     def run(self):
         while True:
+            self.check_events()
             self.update()
             self.draw()
 
+if __name__ == '_main_':
+    game = Game()
+    game.run()
