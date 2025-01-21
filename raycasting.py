@@ -5,7 +5,6 @@ from game_settings import *
 class RayCasting:
     def __init__(self, game):
         self.game = game
-        self.rotation_speed = PLAYER_ROT_SPEED
 
     def ray_cast(self):
         ox, oy = self.game.player.pos
@@ -57,10 +56,15 @@ class RayCasting:
             else:
                 depth = depth_hor
 
-            # drawing for debug
-            pg.draw.line(self.game.screen, "yellow", (100 * ox, 100 * oy),
-                        (100 *  ox + 100 * depth * cos_a, 100 * oy + 100 * depth * sin_a), 2)
+            #projectionnn
+            proj_height = SCREEN_DIST / (depth + 0.0001)
+
+            #wallssss
+            pg.draw.rect(self.game.screen, "white",
+                         (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
+            
             ray_angle += DELTA_ANGLE
 
+           
     def update(self):
         self.ray_cast()
