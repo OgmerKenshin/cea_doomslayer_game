@@ -8,6 +8,7 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode(RES)
         self.clock = pg.time.Clock()
+        self.new_game()
 
     def new_game(self):
         self.map = Map(self)
