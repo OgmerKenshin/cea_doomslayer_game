@@ -10,7 +10,7 @@ class Game:
         self.clock = pg.time.Clock()
 
     def new_game(self):
-        pass
+        self.map = Map(self)
 
     def update(self):
         pg.display.flip()
@@ -18,7 +18,8 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
     def draw(self):
-        self.map = Map(self)
+        self.screen.fill('black')
+        self.map.draw()
 
     def check_events(self):
         for event in pg.event.get():
