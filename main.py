@@ -1,9 +1,9 @@
 import pygame as pg
 import sys
-from settings import *
+from settings import RES
 
 class Game:
-    def _init__(self):
+    def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(RES)
         self.clock = pg.time.Clock()
@@ -23,7 +23,7 @@ class Game:
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
-                pg.exit()
+                sys.exit()
 
     def run(self):
         while True:
@@ -31,6 +31,6 @@ class Game:
             self.update()
             self.draw()
 
-if __name__ == '_main_':
+if __name__ == "__main__":
     game = Game()
     game.run()
