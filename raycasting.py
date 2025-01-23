@@ -71,11 +71,8 @@ class RayCasting:
             #remove fishbowl effect cuz it's annoying
             depth *= math.cos(self.game.player.angle - ray_angle)
 
-            #wallssss
-            
-            color = [255 / (1 + depth ** 5 * 0.00002)] * 3
-            pg.draw.rect(self.game.screen, color,
-                         (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
+            #raycasting results
+            self.ray_casting_result.append((depth, proj_height, texture, offset))
             
             ray_angle += DELTA_ANGLE
 
