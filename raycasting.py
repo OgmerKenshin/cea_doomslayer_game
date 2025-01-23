@@ -32,6 +32,7 @@ class RayCasting:
             for i in range (MAX_DEPTH):
                 tile_hor = int(x_hor), int(y_hor)
                 if tile_hor in self.game.map.world_map:
+                    texture_hor = self.game.map.world_map[tile_hor]
                     break
                 x_hor += dx
                 y_hor += dy 
@@ -46,9 +47,9 @@ class RayCasting:
             dy = delta_depth * sin_a
 
             for i in range (MAX_DEPTH):
-                title_vert = int(x_vert), int(y_vert)
-                if title_vert in self.game.map.world_map:
-                    texture_hor = self.game.map.world_map[tile_hor]
+                tile_vert = int(x_vert), int(y_vert)
+                if tile_vert in self.game.map.world_map:
+                    texture_vert = self.game.world_map[tile_vert]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -56,7 +57,9 @@ class RayCasting:
 
             #depth
             if depth_vert < depth_hor:
-                depth = depth_vert
+                depth, texture = depth_vert, texture_vert
+                y_vert %= 1
+                offset = y_vert if cos_a > 0 else (1 - y_vert)
             else:
                 depth = depth_hor
 
