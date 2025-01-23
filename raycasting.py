@@ -55,13 +55,15 @@ class RayCasting:
                 y_vert += dy
                 depth_vert += delta_depth
 
-            #depth
+            #depth and texture offset
             if depth_vert < depth_hor:
                 depth, texture = depth_vert, texture_vert
                 y_vert %= 1
                 offset = y_vert if cos_a > 0 else (1 - y_vert)
             else:
-                depth = depth_hor
+                depth, texture = depth_hor, texture_hor
+                x_hor %= 1
+                offset = (1 - x_hor) if sin_a > 0 else x_hor
 
             #projectionnn
             proj_height = SCREEN_DIST / (depth + 0.0001)
