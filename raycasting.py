@@ -5,6 +5,9 @@ from game_settings import *
 class RayCasting:
     def __init__(self, game):
         self.game = game
+        self.ray_casting_result = []
+        self.objects_to_render = []
+        self.textures = self.game.object_renderer.wall_textures
 
     def ray_cast(self):
         ox, oy = self.game.player.pos
@@ -45,6 +48,7 @@ class RayCasting:
             for i in range (MAX_DEPTH):
                 title_vert = int(x_vert), int(y_vert)
                 if title_vert in self.game.map.world_map:
+                    texture_hor = self.game.map.world_map[tile_hor]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -63,6 +67,7 @@ class RayCasting:
             depth *= math.cos(self.game.player.angle - ray_angle)
 
             #wallssss
+            
             color = [255 / (1 + depth ** 5 * 0.00002)] * 3
             pg.draw.rect(self.game.screen, color,
                          (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
