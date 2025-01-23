@@ -2,6 +2,7 @@ import pygame as pg
 import math
 from game_settings import *
 
+
 class RayCasting:
     def __init__(self, game):
         self.game = game
@@ -28,6 +29,8 @@ class RayCasting:
         self.ray_casting_result = []
         ox, oy = self.game.player.pos
         x_map, y_map = self.game.player.map_pos
+
+        texture_vert, texture_hor = 1, 1
 
 
 
@@ -65,7 +68,7 @@ class RayCasting:
             for i in range (MAX_DEPTH):
                 tile_vert = int(x_vert), int(y_vert)
                 if tile_vert in self.game.map.world_map:
-                    texture_vert = self.game.world_map[tile_vert]
+                    texture_vert = self.game.map.world_map[tile_vert]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -95,3 +98,4 @@ class RayCasting:
            
     def update(self):
         self.ray_cast()
+        self.get_objects_to_render()
