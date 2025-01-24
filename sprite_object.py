@@ -2,7 +2,7 @@ import pygame as pg
 from game_settings import *
 
 class SpriteObjects:
-    def __init__(self, game, path="static_sprites/chair.png", pos=(10.5, 3.5)):
+    def __init__(self, game, path="static_sprites/candlebra.png", pos=(10.5, 3.5)):
         self.game = game
         self.player = game.player
         self.x, self.y = pos
