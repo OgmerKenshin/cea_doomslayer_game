@@ -10,7 +10,7 @@ class SpriteObjects:
         self.IMAGE_WIGTH = self.image.get_width()
         self.IMAGE_HALF_WIDTH = self.image.get_width() // 2
 
-    def get_sprite():
+    def get_sprite(self):
         dx = self.x - self.player.x
         dy = self.y - self.player.y
         self.dx, self.dy = dx, dy
@@ -22,6 +22,11 @@ class SpriteObjects:
 
         delta_rays = delta / DELTA_ANGLE
         self.screen_x = (HALF_NUM_RAYS + delta_rays) * SCALE
+
+        self.dist = math.hypot(dx, dy)
+        self.norm_dist = self.dist * math.cos(delta)
+        if -self.IMAGE_HALF_WIDTH < self.screen_x < (WIDTH + self.IMAGE_HALF_WIDTH) and self.norm_dist > 0.5:
+            self.get_sprite_projection()
 
     def update(self):
         self.get_sprite()
