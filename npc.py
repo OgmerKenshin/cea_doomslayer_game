@@ -25,6 +25,7 @@ class NPC(AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
+        self.draw_ray_cast()
 
     def animate_pain(self):
         self.animate(self.pain_images)
@@ -107,4 +108,17 @@ class NPC(AnimatedSprite):
             x_vert += dx
             y_vert += dy
             depth_vert += delta_depth
+        
+        player_dist = max(player_dist_v, player_dist_h)
+        wall_dist = max(wall_dist_v, wall_dist_h)
+
+        if 0 < player_dist < wall_dist or not wall_dist:
+            return True
+        return False
+    
+    def draw_ray_cast(self):
+        pg.draw.circle(self.game.screen, 'red', (100 * self.x, 100 * self.y), 15)
+        if self.ray_cast_player_npc():
+            pg.draw.line(self.game.screen, 'orange', (100 * self.game.player.x, 100 * self.game.player.y),
+                         (100 * self.x, 100 * self.y), 2)
         
