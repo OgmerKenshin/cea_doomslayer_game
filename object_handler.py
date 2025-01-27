@@ -8,7 +8,9 @@ class ObjectHandler:
         self.anim_sprite_path = "animated_sprites"
         add_sprite = self.add_sprite
 
-        
+        #sprite
+        add_sprite(SpriteObjects(game))
+        add_sprite(AnimatedSprite(game))
 
     def add_sprite(self, sprite):
         self.sprite_list.append(sprite)
