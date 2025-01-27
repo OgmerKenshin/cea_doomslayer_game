@@ -58,7 +58,8 @@ class AnimatedSprite(SpriteObjects):
         super().__init__(game, path, pos, scale, shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
-        self.image = self.get_images(self.path)
+        self.images = self.get_images(self.path)
+        self.image = self.images[0]
         self.animation_time_prev = pg.time.get_ticks()
         self.animation_trigger = False
 
@@ -84,6 +85,6 @@ class AnimatedSprite(SpriteObjects):
         images = deque()
         for file_name in os.listdir(path):
             if os.path.isfile(os.path.join(path, file_name)):
-                img = pg.image.load(os.path.join(path + '/' + file_name)).convert_alpha()
+                img = pg.image.load(path + '/' + file_name).convert_alpha()
                 images.append(img)
         return images
