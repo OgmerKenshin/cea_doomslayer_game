@@ -7,3 +7,6 @@ class weapon(AnimatedSprite):
             [pg.transform.smoothscale(img, (self.image.get_with() * scale, self.image.get_height() * scale))
              for img in self.images])
         self.weapon_pos = (HALF_WIDTH - self.images[0].get_width() // 2, HEIGHT - self.images[0].get_height())
+
+    def draw(self):
+        self.game.screen.blit(self..images[0], self.weapon_pos)
