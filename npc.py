@@ -19,3 +19,12 @@ class NPC(AnimatedSprite):
         self.accuracy = 0.15
         self.alive = True
         self.pain = False
+
+    def update(self):
+        self.check_animation_time()
+        self.get_sprite()
+        self.run_logic()
+
+    def run_logic(self):
+        if self.alive:
+            self.animate(self.idle_images)
