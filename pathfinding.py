@@ -8,6 +8,11 @@ class Pathfinding:
         self.graph = {}
         self.get_graph()
 
+    def get_path(self, start, goal):
+        self.visited = self.bfs(start, goal, self.graph)
+        path = [goal]
+        step = self.visited.get(goal, start)
+
     def bfs(self, start, goal, graph):
         queue = deque([start])
         visited = {start: None}
