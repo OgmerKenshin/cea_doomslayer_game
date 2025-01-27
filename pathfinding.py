@@ -8,6 +8,25 @@ class Pathfinding:
         self.graph = {}
         self.get_graph()
 
+    def bfs(self, start, goal, graph):
+        queue = deque([start])
+        visited = {start: None}
+
+        while queue:
+            cur_node = queue.popleft()
+            if cur_node == goal:
+                break
+            next_nodes = graph[cur_node]
+
+            for next_node in next_nodes:
+                if next_node not in visited:
+                    queue.append(next_node)
+                    visited[next_node] = cur_node
+        while visited
+
+
+
+
     def get_mext_nodes(self, x, y):
         return[(x + dx, y+ dy) for dx, dy in self.ways if (x + dx, y + dy) not in self.game.map.world_map]
 
