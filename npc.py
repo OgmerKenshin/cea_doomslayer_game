@@ -19,6 +19,7 @@ class NPC(AnimatedSprite):
         self.accuracy = 0.15
         self.alive = True
         self.pain = False
+        self.ray_cast_value = False
 
     def update(self):
         self.check_animation_time()
@@ -44,5 +45,41 @@ class NPC(AnimatedSprite):
                 self.animate_pain()
             else:
                 self.animate(self.idle_images)
+
+    @property
+    def map_pos(self):
+        return int(self.x), int(self.y)
+    
+    def ray_cast(self):
+        self.ray_casting_result = []
+        ox, oy = self.game.player.pos
+        x_map, y_map = self.game.player.map_pos
+
+        texture_vert, texture_hor = 1, 1
+
+
+
+        ray_angle = self.game.player.angle - HALF_FOV + 0.0001
+        for ray in range(NUM_RAYS):
+            sin_a = math.sin(ray_angle)
+            cos_a = math.cos(ray_angle)
+
+            #horizontal linesssss
+            y_hor, dy = (y_map + 1, 1) if sin_a > 0 else (y_map - 1e-6, -1)
+
+            depth_hor = (y_hor - oy) / sin_a
+            x_hor = ox + depth_hor * cos_a
+
+            delta_depth = dy / sin_a
+            dx = delta_depth * cos_a
+
+            for i in range (MAX_DEPTH):
+                tile_hor = int(x_hor), int(y_hor)
+                if tile_hor in self.game.map.world_map:
+                    texture_hor = self.game.map.world_map[tile_hor]
+                    break
+                x_hor += dx
+                y_hor += dy 
+                depth_hor += delta_depth
 
            
