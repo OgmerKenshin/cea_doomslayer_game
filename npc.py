@@ -1,5 +1,5 @@
 from sprite_object import *
-from random import randint, random, choice
+from random import randint, random
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path="npc/soldier/0s.png", pos=(10.5, 5.5),
@@ -13,7 +13,7 @@ class NPC(AnimatedSprite):
 
         self.attack_dist = randint(3, 6)
         self.speed = 0.03
-        self.size = 10
+        self.size = 20
         self.health = 100
         self.attack_damage = 10
         self.accuracy = 0.15
@@ -43,7 +43,7 @@ class NPC(AnimatedSprite):
         next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
         next_x, next_y = next_pos
 
-        if next_pos not in self.game.object_handler.npcpositions:
+        if next_pos not in self.game.object_handler.npc_positions:
             angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
             dx = math.cos(angle) * self.speed
             dy = math.sin(angle) * self.speed

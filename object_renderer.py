@@ -12,7 +12,7 @@ class ObjectRenderer:
         self.blood_screen = self.get_texture('txture_packs/blood_screen.png', RES)
         self.digit_size = 90
         self.digit_images = [self.get_texture(f'txture_packs/digits/{i}.png', [self.digit_size] * 2)
-                             for i in range(11)]
+                             for i in range(1, 11)]
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
         self.game_over_image = self.get_texture('txture_packs/game_over.png', RES)
 
@@ -27,7 +27,7 @@ class ObjectRenderer:
         health = str(self.game.player.health)
         for i, char in enumerate(health):
             self.screen.blit(self.digits[char], (i * self.digit_size, 0))
-        self.screen.blit(self.digits['10'], ((i + 1) * self.digit_size, 0))
+        self.screen.blit(self.digits['1'], ((i + 1) * self.digit_size, 0))
 
 
         
