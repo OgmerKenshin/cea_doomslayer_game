@@ -10,3 +10,6 @@ class weapon(AnimatedSprite):
 
     def draw(self):
         self.game.screen.blit(self..images[0], self.weapon_pos)
+        
+    def updat(self):
+        pass
