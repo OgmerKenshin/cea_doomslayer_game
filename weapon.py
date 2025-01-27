@@ -14,7 +14,6 @@ class weapon(AnimatedSprite):
 
     def animate_shot(self):
         if self.reloading:
-            self.game.player.shot = False
             if self.animation_trigger:
                 self.images.rotate(-1)
                 self.image = self.images[0]
@@ -28,4 +27,5 @@ class weapon(AnimatedSprite):
         
     def updat(self):
         self.check_animation_time()
-        self.animate_shot()
+        if self.reloading:  # Only animate if reloading
+            self.animate_shot()
