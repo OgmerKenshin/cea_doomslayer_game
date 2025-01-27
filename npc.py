@@ -40,7 +40,7 @@ class NPC(AnimatedSprite):
             self.y += dy
 
     def movement(self):
-        next_pos = self.game.player.map_pos
+        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
         next_x, next_y = next_pos
         angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
         dx = math.cos(angle) * self.speed
