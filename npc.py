@@ -50,36 +50,61 @@ class NPC(AnimatedSprite):
     def map_pos(self):
         return int(self.x), int(self.y)
     
-    def ray_cast(self):
-        self.ray_casting_result = []
+    def ray_cast_player_npc(self):
+        if self.game.player.map_pos == self.map_pos:
+            return True
+        
+        wall_dist_v, wall_dist_h = 0, 0
+        player_dist_v, player_dist_h = 0, 0
+
         ox, oy = self.game.player.pos
         x_map, y_map = self.game.player.map_pos
 
-        texture_vert, texture_hor = 1, 1
 
+        ray_angle = self.theta
+        
+        
+        sin_a = math.sin(ray_angle)
+        cos_a = math.cos(ray_angle)
 
+        #horizontal linesssss
+        y_hor, dy = (y_map + 1, 1) if sin_a > 0 else (y_map - 1e-6, -1)
 
-        ray_angle = self.game.player.angle - HALF_FOV + 0.0001
-        for ray in range(NUM_RAYS):
-            sin_a = math.sin(ray_angle)
-            cos_a = math.cos(ray_angle)
+        depth_hor = (y_hor - oy) / sin_a
+        x_hor = ox + depth_hor * cos_a
 
-            #horizontal linesssss
-            y_hor, dy = (y_map + 1, 1) if sin_a > 0 else (y_map - 1e-6, -1)
+        delta_depth = dy / sin_a
+        dx = delta_depth * cos_a
 
-            depth_hor = (y_hor - oy) / sin_a
-            x_hor = ox + depth_hor * cos_a
+        for i in range (MAX_DEPTH):
+            tile_hor = int(x_hor), int(y_hor)
+            if tile_hor == self.map_pos:
+                player_dist_h = depth_hor
+                break
+            if tile_hor in self.game.map.world_map:
+                wall_dist_h = depth_hor
+                break
+            x_hor += dx
+            y_hor += dy 
+            depth_hor += delta_depth
 
-            delta_depth = dy / sin_a
-            dx = delta_depth * cos_a
+        #vertical linez
+        x_vert, dx = (x_map + 1, 1) if cos_a > 0 else (x_map - 1e-6, -1)
+        depth_vert = (x_vert - ox) /cos_a
+        y_vert = oy + depth_vert * sin_a
 
-            for i in range (MAX_DEPTH):
-                tile_hor = int(x_hor), int(y_hor)
-                if tile_hor in self.game.map.world_map:
-                    texture_hor = self.game.map.world_map[tile_hor]
-                    break
-                x_hor += dx
-                y_hor += dy 
-                depth_hor += delta_depth
+        delta_depth = dx / cos_a
+        dy = delta_depth * sin_a
 
-           
+        for i in range (MAX_DEPTH):
+            tile_vert = int(x_vert), int(y_vert)
+            if tile_vert == self.map_pos:
+                player_dist_v = depth_vert
+                break
+            if tile_vert in self.game.map.world_map:
+                wall_dist_v = depth_vert
+                break
+            x_vert += dx
+            y_vert += dy
+            depth_vert += delta_depth
+        
