@@ -27,4 +27,5 @@ class weapon(AnimatedSprite):
         self.game.screen.blit(self.images[0], self.weapon_pos)
         
     def updat(self):
-        pass
+        self.check_animation_time()
+        self.animate_shot()
